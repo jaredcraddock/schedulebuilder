@@ -1,13 +1,18 @@
-var dataSet = [
+var addData = [
      [ "", "20001", "ACCT", "205", "Accounting I", "MW", "11:00", "12:15", "Rahall(318)", "Khanlarian" ],
     [ "", "20006", "ACCT", "205", "Accounting I", "MW", "11:00", "12:15", "Rahall(318)", "Khanlarian" ],
   [ "", "21005", "ACCT", "205", "Accounting I", "MW", "11:00", "12:15", "Rahall(318)", "Khanlarian" ],
   [ "", "23005", "ACCT", "205", "Accounting I", "MW", "11:00", "12:15", "Rahall(318)", "Khanlarian" ],
-  
+  [ "", "21005", "ACCT", "205", "Accounting I", "MW", "11:00", "12:15", "Rahall(318)", "Khanlarian" ],
+  [ "", "21005", "ACCT", "205", "Accounting I", "MW", "11:00", "12:15", "Rahall(318)", "Khanlarian" ],
+  [ "", "21005", "ACCT", "205", "Accounting I", "MW", "11:00", "12:15", "Rahall(318)", "Khanlarian" ],
+  [ "", "21005", "ACCT", "205", "Accounting I", "MW", "11:00", "12:15", "Rahall(318)", "Khanlarian" ],
+  [ "", "21005", "ACCT", "205", "Accounting I", "MW", "11:00", "12:15", "Rahall(318)", "Khanlarian" ],
+  [ "", "21005", "ACCT", "205", "Accounting I", "MW", "11:00", "12:15", "Rahall(318)", "Khanlarian" ]
 
 ];
 
-var moreData = [
+var removeData = [
   
    
 
@@ -27,7 +32,7 @@ $(document).ready(function() {
         } ],
      
      
-        data: dataSet,
+        data: addData,
      
         columns: [
             { title: "ADD" },
@@ -55,12 +60,15 @@ $(document).ready(function() {
   
   $(document).ready(function() {
     $('#removeTable').DataTable( {
+      "scrollY":        "200px",
+        "scrollCollapse": true,
+        "paging":         false,
       "columnDefs": [ {
             "targets": 0,
             "data": null,
             "defaultContent": "<button>MODIFY</button>"
         } ],
-        data: moreData,
+        data: removeData,
         columns: [
             { title: "REMOVE" },
             { title: "CRN" },
