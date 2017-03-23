@@ -3,7 +3,12 @@
 <head>
   <link rel="stylesheet" type="text/css" href="tableCSS.css">
 </head>  
-<script type="text/javascript">
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+<table id="addTable" class="display" width="100%"></table>
+<table id="removeTable" class="display" width="100%"></table>
+  <script type="text/javascript">
 var addData = [
      ["", "10025", "ACCT", "205", "Principles of Accounting I", "TR", "1230", "1345", "RAHALL (315)", "Shelton, T"],
 ["", "10026", "ACCT", "205", "Principles of Accounting I", "MW", "1300", "1415", "RAHALL (318)", "Khanlarian, C"],
@@ -851,9 +856,4 @@ $(document).ready(function() {
   
 } );
 </script>  
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
-
-<table id="addTable" class="display" width="100%"></table>
-<table id="removeTable" class="display" width="100%"></table>
 </html>
