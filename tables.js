@@ -1,26 +1,34 @@
 var dataSet = [
-     [ "Add", "20001", "ACCT", "205", "Accounting I", "MW", "11:00", "12:15", "Rahall(318)", "Khanlarian" ],
-    [ "Add", "20005", "ACCT", "205", "Accounting I", "MW", "11:00", "12:15", "Rahall(318)", "Khanlarian" ],
-  [ "Add", "20005", "ACCT", "205", "Accounting I", "MW", "11:00", "12:15", "Rahall(318)", "Khanlarian" ],
-  [ "Add", "20005", "ACCT", "205", "Accounting I", "MW", "11:00", "12:15", "Rahall(318)", "Khanlarian" ]
+     [ "", "20001", "ACCT", "205", "Accounting I", "MW", "11:00", "12:15", "Rahall(318)", "Khanlarian" ],
+    [ "", "20006", "ACCT", "205", "Accounting I", "MW", "11:00", "12:15", "Rahall(318)", "Khanlarian" ],
+  [ "", "21005", "ACCT", "205", "Accounting I", "MW", "11:00", "12:15", "Rahall(318)", "Khanlarian" ],
+  [ "", "23005", "ACCT", "205", "Accounting I", "MW", "11:00", "12:15", "Rahall(318)", "Khanlarian" ],
+  
 
 ];
 
 var moreData = [
   
-   [ "Add", "200405", "ACCT", "205", "Accounting I", "MW", "11:00", "12:15", "Rahall(318)", "Khanlarian" ]
+   
 
 ];
     
 
 $(document).ready(function() {
    var table = $('#addTable').DataTable( {
+     "scrollY":        "200px",
+        "scrollCollapse": true,
+        "paging":         false,
          "columnDefs": [ {
             "targets": 0,
             "data": null,
             "defaultContent": "<button>MODIFY</button>"
+           
         } ],
+     
+     
         data: dataSet,
+     
         columns: [
             { title: "ADD" },
             { title: "CRN" },
