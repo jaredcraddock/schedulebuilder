@@ -758,7 +758,7 @@ $(document).ready(function() {
   
    var table = $('#addTable').DataTable( {
      
-     
+     "scrollX": true,
      "scrollY":        "275px",
         "scrollCollapse": true,
         "paging":         false,
