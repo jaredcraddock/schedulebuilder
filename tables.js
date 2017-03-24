@@ -12,7 +12,7 @@ $(document).ready(function() {
             "data": null,
             "defaultContent": "<button>MODIFY</button>"
         } ],
-        "ajax": 'ajaxtest.txt'
+        "ajax": 'ajax.txt'
     } );
   
  var table2 =  $('#removeTable').DataTable( {
