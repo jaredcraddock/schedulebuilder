@@ -10,6 +10,7 @@ table.dataTable thead th,
 table.dataTable tfoot th {
     background-color: #800000;
     font-weight: bold;
+  color:white;
 }
 table.dateTable thead th,
 table.dataTable tfoot th {} table.dataTable thead th,
@@ -412,7 +413,7 @@ table.dataTable td {
 }
 .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody th>div.dataTables_sizing,
 .dataTables_wrapper .dataTables_scroll div.dataTables_scrollBody td>div.dataTables_sizing {
-    height: 0px;
+    height: 0;
     overflow: hidden;
     margin: 0 !important;
     padding: 0 !important
