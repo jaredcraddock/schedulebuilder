@@ -1,16 +1,47 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="stylesheet" type="text/css" href="tableCSS.css">
+  <link rel="stylesheet" type="text/css" href="csstest.css">
 </head>
 <body>
   <center><h1>Courses Offered: Fall 2017</h1></center>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
-<table id="addTable" class="display" width="100%"></table>
+
+<table id="addTable" class="display" width="100%">
+        <thead>
+            <tr>
+                <th>Add</th>
+                <th>CRN</th>
+                <th>SUBJ</th>
+                <th>CRS</th>
+                <th>TITLE</th>
+                <th>DAYS</th>
+                <th>STARTS</th>
+                <th>ENDS</th>
+                <th>ROOMS</th>
+                <th>INSTRUCTOR</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>Add</th>
+                <th>CRN</th>
+                <th>SUBJ</th>
+                <th>CRS</th>
+                <th>TITLE</th>
+                <th>DAYS</th>
+                <th>STARTS</th>
+                <th>ENDS</th>
+                <th>ROOMS</th>
+                <th>Instructor</th>
+            </tr>
+        </tfoot>
+    </table>
+  <table id="removeTable" class="display" width="100%"></table>
   <center><h1>Your Schedule</h1></center>
-<table id="removeTable" class="display" width="100%"></table>
+<
 <script type="text/javascript" src="tables.js"></script>
   </body>
 </html>
