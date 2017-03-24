@@ -41,10 +41,24 @@ table.dataTable thead .sorting_desc_disabled {
     background-repeat: no-repeat;
     background-position: center right
 }
+
 table.dataTable thead .sorting {
-    background-color: #800000
-    /*This gives the maroon color to the heading tags */
+    background-image: url("sort_both.png")
 }
+table.dataTable thead .sorting_asc {
+    background-image: url("sort_asc.png")
+}
+table.dataTable thead .sorting_desc {
+    background-image: url("sort_desc.png")
+}
+table.dataTable thead .sorting_asc_disabled {
+    background-image: url("sort_asc_disabled.png")
+}
+table.dataTable thead .sorting_desc_disabled {
+    background-image: url("sort_desc_disabled.png")
+}
+
+
 table.dataTable tbody tr {
     background-color: #ffffff
 }
