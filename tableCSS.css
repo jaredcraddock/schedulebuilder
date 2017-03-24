@@ -432,6 +432,13 @@ table.dataTable td {
     clear: both;
     height: 0
 }
+
+tfoot input {
+        width: 100%;
+        padding: 3px;
+        box-sizing: border-box;
+    }
+
 @media screen and (max-width: 767px) {
     .dataTables_wrapper .dataTables_info,
     .dataTables_wrapper .dataTables_paginate {
