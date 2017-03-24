@@ -759,7 +759,7 @@ $(document).ready(function() {
    var table = $('#addTable').DataTable( {
      
      "scrollX": true,
-     "scrollY":        "275px",
+     "scrollY":        "575px",
         "scrollCollapse": true,
         "paging":         false,
          "columnDefs": [ {
@@ -804,7 +804,8 @@ $(document).ready(function() {
   
   $(document).ready(function() {
     $('#removeTable').DataTable( {
-      "scrollY":        "200px",
+      "scrollX": true,
+      "scrollY":        "575px",
         "scrollCollapse": true,
         "paging":         false,
       "columnDefs": [ {
