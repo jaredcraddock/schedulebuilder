@@ -1,33 +1,41 @@
 
 var removeData = [
 
-
-
 ];
 
 
 $(document).ready(function() {
-  var table = $('#addTable').DataTable( {
-    "columnDefs": [ {
+
+    // Definition of courseTable
+    var courseTable = $('#addTable').DataTable( {
+        "columnDefs": [ {
             "targets": 0,
             "data": null,
             "defaultContent": "<button>ADD</button>"
-        } ],
+            } ],
         "ajax": 'ajax.txt',
-        "dom": "lptrip"
+        "dom": "lptrip" // these change how the information is displayed to the user
+          // the order in which these characters are in determine how it looks
+          // l - length changing input control ( Show X entries )
+          // f - filtering input ( this is what needed to be removed )
+          // t - the table itself
+          // i - the information summary
+          // p - pagination control (this can be in multiple spots e.g. above and below the table)
+          // r - processing display element
     } );
 
- var table2 =  $('#removeTable').DataTable( {
-      "scrollX": true,
-      "scrollY":        "575px",
+    // Definition of scheduleTable
+    var scheduleTable =  $('#removeTable').DataTable( {
+        "scrollX": true,
+        "scrollY": "575px",
         "scrollCollapse": true,
         "paging":         false,
-      "columnDefs": [ {
+        "columnDefs": [ {
             "targets": 0,
             "data": null,
             "defaultContent": "<button>REMOVE</button>"
-        } ],
-        "dom": "t",
+            } ],
+        "dom": "t", // there must be at least a "t" in this or else the searches in the coursesTable mess up
         data: removeData,
         columns: [
             { title: "ACTION" },
@@ -44,35 +52,24 @@ $(document).ready(function() {
     } );
 
 
-
-  // Setup - add a text input to each footer cell
-    $('#addTable').DataTable().columns([1,2,3,4,5,6,7,8,9]).footer().each( function () {
+    // goes through each column index specified and adds the text input to the column footers
+    courseTable.columns([1,2,3,4,5,6,7,8,9]).footer().each( function () {
         $(this).html( '<input type="text" placeholder="Search" />' );
     } );
 
-   $('#addTable tbody').on( 'click', 'button', function () {
-
-    $('#addTable').dataTable().fnDeleteRow($(this).closest('tr')[0]);
-$('#removeTable').dataTable().fnAddData($(this).closest('tr'));
-
-
-
-
+    courseTable.tbody().on( 'click', 'button', function () {
+        courseTable.fnDeleteRow($(this).closest('tr')[0]);
+        scheduleTable.fnAddData($(this).closest('tr'));
     } );
 
-  $('#removeTable tbody').on( 'click', 'button', function () {
-
-    $('#removeTable').dataTable().fnDeleteRow($(this).closest('tr')[0]);
-  $('#addTable').dataTable().fnAddData($(this).closest('tr'));
-
-
-
-
+    scheduleTable.tbody().on( 'click', 'button', function () {
+        scheduleTable.fnDeleteRow($(this).closest('tr')[0]);
+        courseTable.fnAddData($(this).closest('tr'));
     } );
 
 
-    // Apply the search
-    table.columns().every( function () {
+    // Apply the search for specified columns
+    courseTable.columns([1,2,3,4,5,6,7,8,9]).every( function () {
         var that = this;
 
         $( 'input', this.footer() ).on( 'keyup change', function () {
