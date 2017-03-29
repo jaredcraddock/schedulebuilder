@@ -11,8 +11,7 @@ $(document).ready(function() {
     "columnDefs": [ {
             "targets": 0,
             "data": null,
-            "defaultContent": "<button>ADD</button>",
-            "searchable": false
+            "defaultContent": "<button>ADD</button>"
         } ],
         "ajax": 'ajax.txt',
         "dom": "lptrip"
@@ -26,11 +25,10 @@ $(document).ready(function() {
       "columnDefs": [ {
             "targets": 0,
             "data": null,
-            "defaultContent": "<button>REMOVE</button>",
-            "searchable": false
+            "defaultContent": "<button>REMOVE</button>"
         } ],
+        "dom": "t",
         data: removeData,
-        "dom": "",
         columns: [
             { title: "ACTION" },
             { title: "CRN" },
@@ -44,6 +42,7 @@ $(document).ready(function() {
             { title: "INSTRUCTOR" }
         ]
     } );
+
 
 
   // Setup - add a text input to each footer cell
