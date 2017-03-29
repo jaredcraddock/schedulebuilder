@@ -5,6 +5,9 @@ var removeData = [
 
 
 $(document).ready(function() {
+    // NOTE: DataTable and dataTable are two different things!!!
+    //        DataTable is newer and provides more of an API than dataTable
+    //        However, dataTable can access the new API. Example $('#Table').dataTable().api().-----
 
     // Definition of courseTable
     var courseTable = $('#addTable').DataTable( {
@@ -13,7 +16,7 @@ $(document).ready(function() {
             "data": null,
             "defaultContent": "<button>ADD</button>"
             } ],
-        "ajax": 'ajax.txt',
+        "ajax": "ajax.txt",
         "dom": "lptrip" // these change how the information is displayed to the user
           // the order in which these characters are in determine how it looks
           // l - length changing input control ( Show X entries )
@@ -57,14 +60,27 @@ $(document).ready(function() {
         $(this).html( '<input type="text" placeholder="Search" />' );
     } );
 
-    $('#addTable tbody').on( 'click', 'button', function () {
-        $('#addTable').dataTable().fnDeleteRow($(this).closest('tr')[0]);
-        $('#removeTable').dataTable().fnAddData($(this).closest('tr'));
+    // when the add button is clicked on the course table, the record is removed and then added to the schedule table
+    courseTable.on( 'click', 'button', function () {
+        //$('#addTable').dataTable().fnDeleteRow($(this).closest('tr')[0]);
+        //$('#removeTable').dataTable().fnAddData($(this).closest('tr'));
+        var row = courseTable.row( $(this).parents('tr') );
+        scheduleTable.row.add( row.node() ).draw();
+
+        row.remove();
+
+        courseTable.draw();
     } );
 
-    $('#removeTable tbody').on( 'click', 'button', function () {
-        $('#removeTable').dataTable().fnDeleteRow($(this).closest('tr')[0]);
-        $('#addTable').dataTable().fnAddData($(this).closest('tr'));
+    // when remove button is clicked on the schdule table, the row is removed and then added to the course table
+    scheduleTable.on( 'click', 'button', function () {
+        //$('#removeTable').dataTable().fnDeleteRow($(this).closest('tr')[0]);
+        //$('#addTable').dataTable().fnAddData($(this).closest('tr'));
+        var row = scheduleTable.row( $(this).parents('tr') );
+        courseTable.row.add( row.node() ).draw();
+        row.remove();
+
+        scheduleTable.draw();
     } );
 
 
