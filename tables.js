@@ -13,7 +13,7 @@ $(document).ready(function() {
             "defaultContent": "<button>MODIFY</button>"
         } ],
         "ajax": 'ajax.txt',
-        "dom": "ltipr"
+        "dom": ""
     } );
 
  var table2 =  $('#removeTable').DataTable( {
