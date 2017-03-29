@@ -57,15 +57,16 @@ $(document).ready(function() {
         $(this).html( '<input type="text" placeholder="Search" />' );
     } );
 
-    courseTable.table().body().on( 'click', 'button', function () {
-        courseTable.fnDeleteRow($(this).closest('tr')[0]);
-        scheduleTable.fnAddData($(this).closest('tr'));
+    $('#addTable tbody').on( 'click', 'button', function () {
+        $('#addTable').dataTable().fnDeleteRow($(this).closest('tr')[0]);
+        $('#removeTable').dataTable().fnAddData($(this).closest('tr'));
     } );
 
-    scheduleTable.table().body().on( 'click', 'button', function () {
-        scheduleTable.fnDeleteRow($(this).closest('tr')[0]);
-        courseTable.fnAddData($(this).closest('tr'));
+    $('#removeTable tbody').on( 'click', 'button', function () {
+        $('#removeTable').dataTable().fnDeleteRow($(this).closest('tr')[0]);
+        $('#addTable').dataTable().fnAddData($(this).closest('tr'));
     } );
+
 
 
     // Apply the search for specified columns
