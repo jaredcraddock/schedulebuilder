@@ -57,12 +57,12 @@ $(document).ready(function() {
         $(this).html( '<input type="text" placeholder="Search" />' );
     } );
 
-    courseTable.tbody().on( 'click', 'button', function () {
+    courseTable.table().body().on( 'click', 'button', function () {
         courseTable.fnDeleteRow($(this).closest('tr')[0]);
         scheduleTable.fnAddData($(this).closest('tr'));
     } );
 
-    scheduleTable.tbody().on( 'click', 'button', function () {
+    scheduleTable.table().body().on( 'click', 'button', function () {
         scheduleTable.fnDeleteRow($(this).closest('tr')[0]);
         courseTable.fnAddData($(this).closest('tr'));
     } );
