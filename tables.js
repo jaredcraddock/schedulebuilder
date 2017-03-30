@@ -1,5 +1,5 @@
 
-var removeData = [
+var scheduleData = [ // placeholder for data to be stored by scheduleTable
 
 ];
 
@@ -11,13 +11,43 @@ $(document).ready(function() {
 
     // Definition of courseTable
     var courseTable = $('#addTable').DataTable( {
+
+        // column definintions
         "columnDefs": [ {
-            "targets": 0,
-            "data": null,
-            "defaultContent": "<button>ADD</button>"
-            } ],
-        "ajax": "ajax.txt",
-        "dom": "lptrip" // these change how the information is displayed to the user
+            "targets": 0, // I want this set of options inside { } to only affect column index 0
+            "data": null, // no external data will be stored in this column
+            "defaultContent": "<button>ADD</button>", // creates an add button for the column
+            //"sorting": false, // sorting is useless in this column but the sorting icon still appears in the header. hmm..
+            orderable: false
+          }],
+        orderCellsTop: true,
+        "order": [[1, 'asc']],
+
+        // Data sources
+        "ajax": "https://jaredcraddock.github.io/schedulebuilder/ajax.txt",
+
+        // visuals
+        initComplete: function () {
+             this.api().columns().every( function () { // adds drop down boxes to only subject and days columns
+                var column = this;
+                var select = $('<select><option value=""></option></select>')
+                    .appendTo( $('#addTable thead tr#filters th#selectSearch' + $(column.header()).html()).empty() )
+                    .on( 'change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+
+                        column
+                            .search( val ? '^'+val+'$' : '', true, false ) // I have no idea
+                            .draw();
+                    } );
+
+                column.data().unique().sort().each( function ( d, j ) {
+                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                } );
+            } );
+        },
+        "dom": "pltrip" // these change how the information is displayed to the user
           // the order in which these characters are in determine how it looks
           // l - length changing input control ( Show X entries )
           // f - filtering input ( this is what needed to be removed )
@@ -29,19 +59,23 @@ $(document).ready(function() {
 
     // Definition of scheduleTable
     var scheduleTable =  $('#removeTable').DataTable( {
+
+        // visuals
         "scrollX": true,
         "scrollY": "575px",
         "scrollCollapse": true,
         "paging":         false,
-        "columnDefs": [ {
+        "dom": "t", // there must be at least a "t" in this or else the searches in the coursesTable mess up
+
+        // column definitions
+        "columnDefs": [ { // creates a remove button for column 0 without sorting or any external data
             "targets": 0,
             "data": null,
-            "defaultContent": "<button>REMOVE</button>"
+            "defaultContent": "<button>REMOVE</button>",
+            "sorting": false
             } ],
-        "dom": "t", // there must be at least a "t" in this or else the searches in the coursesTable mess up
-        data: removeData,
         columns: [
-            { title: "ACTION" },
+            { title: "" },
             { title: "CRN" },
             { title: "SUBJ" },
             { title: "CRS" },
@@ -51,45 +85,51 @@ $(document).ready(function() {
             { title: "ENDS" },
             { title: "ROOM" },
             { title: "INSTRUCTOR" }
-        ]
+            ],
+
+        // data sources
+        data: scheduleData
     } );
 
 
     // goes through each column index specified and adds the text input to the column footers
-    courseTable.columns([1,2,3,4,5,6,7,8,9]).footer().each( function () {
+    $( courseTable.columns([1,3,4,6,7,8,9]).header()).each( function () {
+      $('#addTable thead tr#filters th#textSearch' + $(this).html()).each(function() {
         $(this).html( '<input type="text" placeholder="Search" />' );
+      } );
     } );
+
 
     // when the add button is clicked on the course table, the record is removed and then added to the schedule table
     courseTable.on( 'click', 'button', function () {
         //$('#addTable').dataTable().fnDeleteRow($(this).closest('tr')[0]);
         //$('#removeTable').dataTable().fnAddData($(this).closest('tr'));
         var row = courseTable.row( $(this).parents('tr') );
-        scheduleTable.row.add( row.node() ).draw();
+        scheduleTable.row.add( row.node() ).draw(); // DataTables add rows by their nodes and not the actual row. The table must be drawn again to refelct the changes
 
         row.remove();
 
-        courseTable.draw();
+        courseTable.draw(); // redraw the table to reflect the deletion
     } );
+
 
     // when remove button is clicked on the schdule table, the row is removed and then added to the course table
     scheduleTable.on( 'click', 'button', function () {
         //$('#removeTable').dataTable().fnDeleteRow($(this).closest('tr')[0]);
         //$('#addTable').dataTable().fnAddData($(this).closest('tr'));
         var row = scheduleTable.row( $(this).parents('tr') );
-        courseTable.row.add( row.node() ).draw();
+        courseTable.row.add( row.node() ).draw(); // DataTables add rows by their nodes and not the actual row. The table must be drawn again to refelct the changes
         row.remove();
 
-        scheduleTable.draw();
+        scheduleTable.draw(); // redraw the table to reflect the deletion
     } );
-
 
 
     // Apply the search for specified columns
     courseTable.columns([1,2,3,4,5,6,7,8,9]).every( function () {
         var that = this;
 
-        $( 'input', this.footer() ).on( 'keyup change', function () {
+        $( 'input', $('#addTable thead tr#filters th#textSearch' + $(this.header()).html() )).on( 'keyup change', function () {
             if ( that.search() !== this.value ) {
                 that
                     .search( this.value )
