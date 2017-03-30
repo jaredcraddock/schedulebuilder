@@ -12,8 +12,8 @@ $(document).ready(function() {
             "targets": 0,
             "data": null,
             "defaultContent": "<button>ADD</button>",
-            "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]]
             } ],
+        "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
         "ajax": "ajax.txt",
         "dom": "lptrip" // these change how the information is displayed to the user
           // the order in which these characters are in determine how it looks
