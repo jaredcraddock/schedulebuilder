@@ -11,7 +11,8 @@ $(document).ready(function() {
         "columnDefs": [ {
             "targets": 0,
             "data": null,
-            "defaultContent": "<button>ADD</button>"
+            "defaultContent": "<button>ADD</button>",
+            "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]]
             } ],
         "ajax": "ajax.txt",
         "dom": "lptrip" // these change how the information is displayed to the user
@@ -30,7 +31,6 @@ $(document).ready(function() {
         "scrollY": "575px",
         "scrollCollapse": true,
         "paging":         false,
-        "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
         "columnDefs": [ {
             "targets": 0,
             "data": null,
