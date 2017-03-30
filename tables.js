@@ -30,6 +30,7 @@ $(document).ready(function() {
         "scrollY": "575px",
         "scrollCollapse": true,
         "paging":         false,
+        "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
         "columnDefs": [ {
             "targets": 0,
             "data": null,
