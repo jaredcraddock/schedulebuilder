@@ -11,7 +11,7 @@ $(document).ready(function() {
         "columnDefs": [ {
             "targets": 0,
             "data": null,
-            "defaultContent": "<button>ADD</button>",
+            "defaultContent": "<button>ADD</button>"
             } ],
         "ajax": "ajax.txt",
         "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
