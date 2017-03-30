@@ -1,16 +1,13 @@
 
-var removeData = [
-
-];
-
+var removeData = [];
 
 $(document).ready(function() {
     // NOTE: DataTable and dataTable are two different things!!!
-    //        DataTable is newer and provides more of an API than dataTable
-    //        However, dataTable can access the new API. Example $('#Table').dataTable().api().-----
+    // DataTable is newer and provides more of an API than dataTable
+    // However, dataTable can access the new API. Example $('#Table').dataTable().api().-----
 
     // Definition of courseTable
-    var courseTable = $('#addTable').DataTable( {
+    var courseTable = $('#courseTable').DataTable( {
         "columnDefs": [ {
             "targets": 0,
             "data": null,
@@ -28,7 +25,7 @@ $(document).ready(function() {
     } );
 
     // Definition of scheduleTable
-    var scheduleTable =  $('#removeTable').DataTable( {
+    var scheduleTable =  $('#scheduleTable').DataTable( {
         "scrollX": true,
         "scrollY": "575px",
         "scrollCollapse": true,
@@ -54,7 +51,6 @@ $(document).ready(function() {
         ]
     } );
 
-
     // goes through each column index specified and adds the text input to the column footers
     courseTable.columns([1,2,3,4,5,6,7,8,9]).footer().each( function () {
         $(this).html( '<input type="text" placeholder="Search" />' );
@@ -62,8 +58,8 @@ $(document).ready(function() {
 
     // when the add button is clicked on the course table, the record is removed and then added to the schedule table
     courseTable.on( 'click', 'button', function () {
-        //$('#addTable').dataTable().fnDeleteRow($(this).closest('tr')[0]);
-        //$('#removeTable').dataTable().fnAddData($(this).closest('tr'));
+        //$('#courseTable').dataTable().fnDeleteRow($(this).closest('tr')[0]);
+        //$('#scheduleTable').dataTable().fnAddData($(this).closest('tr'));
         var row = courseTable.row( $(this).parents('tr') );
         scheduleTable.row.add( row.node() ).draw();
 
@@ -74,16 +70,14 @@ $(document).ready(function() {
 
     // when remove button is clicked on the schdule table, the row is removed and then added to the course table
     scheduleTable.on( 'click', 'button', function () {
-        //$('#removeTable').dataTable().fnDeleteRow($(this).closest('tr')[0]);
-        //$('#addTable').dataTable().fnAddData($(this).closest('tr'));
+        //$('#scheduleTable').dataTable().fnDeleteRow($(this).closest('tr')[0]);
+        //$('#courseTable').dataTable().fnAddData($(this).closest('tr'));
         var row = scheduleTable.row( $(this).parents('tr') );
         courseTable.row.add( row.node() ).draw();
         row.remove();
 
         scheduleTable.draw();
     } );
-
-
 
     // Apply the search for specified columns
     courseTable.columns([1,2,3,4,5,6,7,8,9]).every( function () {
