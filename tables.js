@@ -19,33 +19,38 @@ $(document).ready(function() {
             "defaultContent": "<button>ADD</button>", // creates an add button for the column
             //"sorting": false, // sorting is useless in this column but the sorting icon still appears in the header. hmm..
             orderable: false
-          }],
-        orderCellsTop: true,
-        "order": [[1, 'asc']],
+          }, { width: 1, targets: [1,3,5,6,7]} // sets a really small width of certain columns to make sure they aren't bigger than they need to be
+        ],
+        orderCellsTop: true, // tells the table to do its odering on the top most header row. This must be true
+        "order": [[1, 'asc']], // start with asc order on column 1
 
         // Data sources
         "ajax": "https://jaredcraddock.github.io/schedulebuilder/ajax.txt",
 
         // visuals
-        initComplete: function () {
-             this.api().columns().every( function () { // adds drop down boxes to only subject and days columns
-                var column = this;
-                var select = $('<select><option value=""></option></select>')
-                    .appendTo( $('#addTable thead tr#filters th#selectSearch' + $(column.header()).html()).empty() )
-                    .on( 'change', function () {
-                        var val = $.fn.dataTable.util.escapeRegex(
-                            $(this).val()
-                        );
+        initComplete: function () { // wait for the table to complete initialization with its data
+           this.api().columns().every( function () { // adds drop down boxes to only subject and days columns
+              var column = this;
 
-                        column
-                            .search( val ? '^'+val+'$' : '', true, false ) // I have no idea
-                            .draw();
-                    } );
+              // the logic for this is the same as adding text search input boxes
+              // append the html code for select searches to the table header row with the filters id
+              // then listen for a change to occur and then fire the code that searches the table's column
+              var select = $('<select><option value=""></option></select>')
+                  .appendTo( $('#addTable thead tr#filters th#selectSearch' + $(column.header()).html()).empty() )
+                  .on( 'change', function () {
+                      var val = $.fn.dataTable.util.escapeRegex(
+                          $(this).val()
+                      );
 
-                column.data().unique().sort().each( function ( d, j ) {
-                    select.append( '<option value="'+d+'">'+d+'</option>' )
-                } );
-            } );
+                      column
+                          .search( val ? '^'+val+'$' : '', true, false ) // I have no idea
+                          .draw();
+                  } );
+
+              column.data().unique().sort().each( function ( d, j ) {
+                  select.append( '<option value="'+d+'">'+d+'</option>' )
+              } );
+          } );
         },
         "dom": "pltrip" // these change how the information is displayed to the user
           // the order in which these characters are in determine how it looks
@@ -66,6 +71,7 @@ $(document).ready(function() {
         "scrollCollapse": true,
         "paging":         false,
         "dom": "t", // there must be at least a "t" in this or else the searches in the coursesTable mess up
+        "order": [[1, 'asc']],
 
         // column definitions
         "columnDefs": [ { // creates a remove button for column 0 without sorting or any external data
@@ -94,22 +100,25 @@ $(document).ready(function() {
 
     // goes through each column index specified and adds the text input to the column footers
     $( courseTable.columns([1,3,4,6,7,8,9]).header()).each( function () {
+      // Due to the limitations on DataTable, only one header row can be the header for a column and there isn't a way to access multiple header rows
+      // So instead, the html file contains id's with textSearch + column name to differentiate between the different columns
+      // for every column in the loop, we insert the input html code only for id's containing textSearch so we don't mix it up with selectSearch
       $('#addTable thead tr#filters th#textSearch' + $(this).html()).each(function() {
-        $(this).html( '<input type="text" placeholder="Search" />' );
+        $(this).html( '<input type="text" placeholder="Search" style="width: 100%"/>' );
       } );
     } );
 
 
     // when the add button is clicked on the course table, the record is removed and then added to the schedule table
     courseTable.on( 'click', 'button', function () {
-        //$('#addTable').dataTable().fnDeleteRow($(this).closest('tr')[0]);
-        //$('#removeTable').dataTable().fnAddData($(this).closest('tr'));
-        var row = courseTable.row( $(this).parents('tr') );
-        scheduleTable.row.add( row.node() ).draw(); // DataTables add rows by their nodes and not the actual row. The table must be drawn again to refelct the changes
+      //$('#addTable').dataTable().fnDeleteRow($(this).closest('tr')[0]);
+      //$('#removeTable').dataTable().fnAddData($(this).closest('tr'));
+      var row = courseTable.row( $(this).parents('tr') );
+      scheduleTable.row.add( row.node() ).draw(); // DataTables add rows by their nodes and not the actual row. The table must be drawn again to refelct the changes
 
-        row.remove();
+      row.remove();
 
-        courseTable.draw(); // redraw the table to reflect the deletion
+      courseTable.draw(); // redraw the table to reflect the deletion
     } );
 
 
@@ -129,6 +138,8 @@ $(document).ready(function() {
     courseTable.columns([1,2,3,4,5,6,7,8,9]).every( function () {
         var that = this;
 
+        // just as for adding the text searches, when applying them we have to match the text search input with the column it searches
+        // the name for a column is contained in $(this.header()).html()
         $( 'input', $('#addTable thead tr#filters th#textSearch' + $(this.header()).html() )).on( 'keyup change', function () {
             if ( that.search() !== this.value ) {
                 that

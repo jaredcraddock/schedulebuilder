@@ -451,7 +451,7 @@ table.dataTable td {
 }
 
 tfoot input {
-        width: 100%;
+        width: 100px;
         padding: 3px;
         box-sizing: border-box;
     }
