@@ -14,6 +14,7 @@ $(document).ready(function() {
             "defaultContent": "<button>ADD</button>"
             } ],
         "ajax": "ajax.txt",
+        "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
         "dom": "lptrip" // these change how the information is displayed to the user
           // the order in which these characters are in determine how it looks
           // l - length changing input control ( Show X entries )
