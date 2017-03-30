@@ -36,7 +36,7 @@ $(document).ready(function() {
               // append the html code for select searches to the table header row with the filters id
               // then listen for a change to occur and then fire the code that searches the table's column
               var select = $('<select><option value=""></option></select>')
-                  .appendTo( $('#addTable thead tr#filters th#selectSearch' + $(column.header()).html()).empty() )
+                  .appendTo( $('#courseTable thead tr#filters th#selectSearch' + $(column.header()).html()).empty() )
                   .on( 'change', function () {
                       var val = $.fn.dataTable.util.escapeRegex(
                           $(this).val()
@@ -99,13 +99,13 @@ $(document).ready(function() {
     } );
 
     // goes through each column index specified and adds the text input to the column footers
-    $( courseTable.columns([1,3,4,6,7,8,9]).header()).each( function () {
-      // Due to the limitations on DataTable, only one header row can be the header for a column and there isn't a way to access multiple header rows
-      // So instead, the html file contains id's with textSearch + column name to differentiate between the different columns
-      // for every column in the loop, we insert the input html code only for id's containing textSearch so we don't mix it up with selectSearch
-      $('#addTable thead tr#filters th#textSearch' + $(this).html()).each(function() {
-        $(this).html( '<input type="text" placeholder="Search" style="width: 100%"/>' );
-      } );
+    $( courseTable.columns([1,3,4,8,9]).header()).each( function () {
+        // Due to the limitations on DataTable, only one header row can be the header for a column and there isn't a way to access multiple header rows
+        // So instead, the html file contains id's with textSearch + column name to differentiate between the different columns
+        // for every column in the loop, we insert the input html code only for id's containing textSearch so we don't mix it up with selectSearch
+        $('#courseTable thead tr#filters th#textSearch' + $(this).html()).each(function() {
+          $(this).html( '<input type="text" placeholder="Search" style="width: 100%"/>' );
+        } );
     } );
 
 
@@ -134,12 +134,12 @@ $(document).ready(function() {
     } );
 
     // Apply the search for specified columns
-    courseTable.columns([1,2,3,4,5,6,7,8,9]).every( function () {
+    courseTable.columns([1,3,4,8,9]).every( function () {
         var that = this;
 
         // just as for adding the text searches, when applying them we have to match the text search input with the column it searches
         // the name for a column is contained in $(this.header()).html()
-        $( 'input', $('#addTable thead tr#filters th#textSearch' + $(this.header()).html() )).on( 'keyup change', function () {
+        $( 'input', $('#courseTable thead tr#filters th#textSearch' + $(this.header()).html() )).on( 'keyup change', function () {
             if ( that.search() !== this.value ) {
                 that
                     .search( this.value )
