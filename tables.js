@@ -25,7 +25,7 @@ $(document).ready(function() {
         "order": [[1, 'asc']], // start with asc order on column 1
 
         // Data sources
-        "ajax": "https://jaredcraddock.github.io/schedulebuilder/ajax.txt",
+        "ajax": "ajax.txt",
 
         // visuals
         initComplete: function () { // wait for the table to complete initialization with its data
