@@ -12,7 +12,7 @@ $(document).ready(function() {
             "data": null,
             "defaultContent": "<button id = \"addButton\">ADD</button>"
             } ],
-        "ajax": "ajax.txt",
+        "ajax": "https://kyleblud.github.io/schedulebuilder/ajax.txt",
         "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
         "dom": "pltrip" // these change how the information is displayed to the user
           // the order in which these characters are in determine how it looks
