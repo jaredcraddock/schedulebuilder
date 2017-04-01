@@ -1,8 +1,5 @@
 
-var scheduleData = [ // placeholder for data to be stored by scheduleTable
-
-];
-
+var scheduleData = []; // placeholder for data to be stored by scheduleTable
 
 $(document).ready(function() {
     // NOTE: DataTable and dataTable are two different things!!!
@@ -14,13 +11,6 @@ $(document).ready(function() {
 
         // column definintions
         "columnDefs": [ {
-<<<<<<< HEAD
-            "targets": 0,
-            "data": null,
-            "defaultContent": "<button id = \"addButton\">ADD</button>"
-            } ],
-        "ajax": "https://kyleblud.github.io/schedulebuilder/ajax.txt",
-=======
             "targets": 0, // I want this set of options inside { } to only affect column index 0
             "data": null, // no external data will be stored in this column
             "defaultContent": "<button id = \"addButton\">ADD</button>", // creates an add button for the column
@@ -32,7 +22,7 @@ $(document).ready(function() {
         "order": [[1, 'asc']], // start with asc order on column 1
 
         // Data sources
-        "ajax": "ajax.txt",
+        "ajax": "https://kyleblud.github.io/schedulebuilder/ajax.txt",
 
         // visuals
         initComplete: function () { // wait for the table to complete initialization with its data
@@ -59,7 +49,6 @@ $(document).ready(function() {
               } );
           } );
         },
->>>>>>> jaredcraddock/master
         "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
         "dom": "pltrip" // these change how the information is displayed to the user
           // the order in which these characters are in determine how it looks
@@ -155,4 +144,3 @@ $(document).ready(function() {
             }
         } );
     } );
-} );
