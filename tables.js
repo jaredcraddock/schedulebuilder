@@ -1,5 +1,7 @@
+var scheduleData = [ // placeholder for data to be stored by scheduleTable
 
-var scheduleData = []; // placeholder for data to be stored by scheduleTable
+];
+
 
 $(document).ready(function() {
     // NOTE: DataTable and dataTable are two different things!!!
@@ -144,3 +146,4 @@ $(document).ready(function() {
             }
         } );
     } );
+} );
