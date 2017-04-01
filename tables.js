@@ -1,7 +1,9 @@
 
+
 var scheduleData = [ // placeholder for data to be stored by scheduleTable
 
 ];
+
 
 
 $(document).ready(function() {
@@ -9,7 +11,6 @@ $(document).ready(function() {
     // DataTable is newer and provides more of an API than dataTable
     // However, dataTable can access the new API. Example $('#Table').dataTable().api().-----
 
-    // Definition of courseTable
     var courseTable = $('#courseTable').DataTable( {
 
         // column definintions
@@ -24,7 +25,7 @@ $(document).ready(function() {
         orderCellsTop: true, // tells the table to do its odering on the top most header row. This must be true
         "order": [[1, 'asc']], // start with asc order on column 1
 
-        // Data sources
+
         "ajax": "ajax.txt",
 
         // visuals
@@ -63,10 +64,9 @@ $(document).ready(function() {
           // r - processing display element
     } );
 
-    // Definition of scheduleTable
-    var scheduleTable =  $('#scheduleTable').DataTable( {
 
-        // visuals
+    // Definition of $scheduleTable
+    var $scheduleTable =  $('#scheduleTable').DataTable( {
         "scrollX": true,
         "scrollY": "575px",
         "scrollCollapse": true,
@@ -78,7 +78,7 @@ $(document).ready(function() {
         "columnDefs": [ { // creates a remove button for column 0 without sorting or any external data
             "targets": 0,
             "data": null,
-            "defaultContent": "<button>REMOVE</button>",
+            "defaultContent": "<button id = \"removeButton\">REMOVE</button>",
             "sorting": false
             } ],
         columns: [
@@ -99,6 +99,7 @@ $(document).ready(function() {
     } );
 
     // goes through each column index specified and adds the text input to the column footers
+
     $( courseTable.columns([1,3,4,8,9]).header()).each( function () {
         // Due to the limitations on DataTable, only one header row can be the header for a column and there isn't a way to access multiple header rows
         // So instead, the html file contains id's with textSearch + column name to differentiate between the different columns
@@ -106,35 +107,38 @@ $(document).ready(function() {
         $('#courseTable thead tr#filters th#textSearch' + $(this).html()).each(function() {
           $(this).html( '<input type="text" placeholder="Search" style="width: 100%"/>' );
         } );
+
     } );
 
 
     // when the add button is clicked on the course table, the record is removed and then added to the schedule table
-    courseTable.on( 'click', 'button', function () {
+    $courseTable.on( 'click', '#addButton', function () {
         //$('#courseTable').dataTable().fnDeleteRow($(this).closest('tr')[0]);
         //$('#scheduleTable').dataTable().fnAddData($(this).closest('tr'));
-        var row = courseTable.row( $(this).parents('tr') );
-        scheduleTable.row.add( row.node() ).draw(); // DataTables add rows by their nodes and not the actual row. The table must be drawn again to refelct the changes
+
+        var row = $courseTable.row( $(this).parents('tr') );
+        $scheduleTable.row.add( row.node() ).draw();
 
         row.remove();
 
-        courseTable.draw(); // redraw the table to reflect the deletion
+        $courseTable.draw();
+
     } );
 
 
     // when remove button is clicked on the schdule table, the row is removed and then added to the course table
-    scheduleTable.on( 'click', 'button', function () {
+    $scheduleTable.on( 'click', '#removeButton', function () {
         //$('#scheduleTable').dataTable().fnDeleteRow($(this).closest('tr')[0]);
         //$('#courseTable').dataTable().fnAddData($(this).closest('tr'));
-        var row = scheduleTable.row( $(this).parents('tr') );
-        courseTable.row.add( row.node() ).draw(); // DataTables add rows by their nodes and not the actual row. The table must be drawn again to refelct the changes
+        var row = $scheduleTable.row( $(this).parents('tr') );
+        $courseTable.row.add( row.node() ).draw();
         row.remove();
 
-        scheduleTable.draw(); // redraw the table to reflect the deletion
+        $scheduleTable.draw();
     } );
 
     // Apply the search for specified columns
-    courseTable.columns([1,3,4,8,9]).every( function () {
+    $courseTable.columns([1,3,4,8,9]).every( function () {
         var that = this;
 
         // just as for adding the text searches, when applying them we have to match the text search input with the column it searches
