@@ -2,15 +2,20 @@
 <html>
 <head>
   <link rel="stylesheet" type="text/css" href="tableCSS.css">
+  <title>CU Schedule Builder</title>
 </head>
 <body>
-
-  <!-- DataTables CSS styling and script -->
+  <!--  -->
   <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
   <!-- Schedule Table -->
   <center><h1>Your Schedule</h1></center>
   <table id="scheduleTable" class="display" width="100%"></table>
+  <!-- Week Table -->
+  <center><button id = "weekTableButton">Week at a Glance</button></center>
+  <div id = "weekTableContainer">
+    <center><h1>Week at a Glance</h1></center>
+  </div>
   <!-- Course Table -->
   <center><h1>Courses Offered: Fall 2017</h1></center>
   <table id="courseTable" class="display" width="100%">
@@ -40,8 +45,6 @@
         <th id="textSearchINSTRUCTOR">INSTRUCTOR</th>
       </tr>
     </thead>
-    <tfoot>
-    </tfoot>
   </table>
   <script type="text/javascript" src="tables.js"></script>
 </body>
