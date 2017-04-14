@@ -81,7 +81,7 @@ $(document).ready(function() {
         } ],
         orderCellsTop: true, // tells the table to do its odering on the top most header row. This must be true
         "order": [[1, 'asc']], // Automatically puts data in ascending order in CRN column.
-        "ajax": "https://kyleblud.github.io/schedulebuilder/ajax.txt",
+        "ajax": "ajax.txt",
         initComplete: function () { // wait for the table to complete initialization with its data
            this.api().columns().every(function () { // adds drop down boxes to only subject and days columns
               var column = this;
