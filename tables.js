@@ -29,6 +29,7 @@ function wipeWeekTable() {
 
     if (weekTableVisible) {
         $("#weekTableContainer").hide("slow");
+        $("#weekTableContainer p").remove();
         $("#weekTable").remove();
     }
 }
@@ -298,6 +299,8 @@ $(document).ready(function() {
 
         var course;
         var rowspan;
+        var webCourseSymbol = "--";
+        var webCourses = new Array();
         var $currSlot;
         var $currRow;
 
@@ -309,25 +312,40 @@ $(document).ready(function() {
                 parseInt(scheduleData[i][iEndTime]), 
                 scheduleData[i][iBuilding]
             );
-            rowspan = Math.floor((course.getEndTime - course.getStartTime) / 25) + 1;
-            for (var j = 0; j < course.getDays.length; j++) {
-                $currSlot = $("#" + course.getDays.charAt(j) + course.startTime);
-                $currRow = $currSlot.closest("tr");
-                for (var k = 0; k < rowspan; k++) {
-                    if (k == 0) {
-                        $currSlot
-                            .attr("rowspan", rowspan)
-                            .removeClass("free-slot")
-                            .addClass("filled-slot")
-                            .text(course.getName);
+            if (course.getDays != webCourseSymbol) {
+                rowspan = Math.floor((course.getEndTime - course.getStartTime) / 25) + 1;
+                for (var j = 0; j < course.getDays.length; j++) {
+                    $currSlot = $("#" + course.getDays.charAt(j) + course.startTime);
+                    $currRow = $currSlot.closest("tr");
+                    for (var k = 0; k < rowspan; k++) {
+                        if (k == 0) {
+                            $currSlot
+                                .attr("rowspan", rowspan)
+                                .removeClass("free-slot")
+                                .addClass("filled-slot")
+                                .text(course.getName);
+                        }
+                        else {
+                            $currSlot.remove();
+                        }
+                        $currRow = $currRow.next();
+                        $currSlot = $("#" + course.getDays.charAt(j) + $currRow.attr("id"));
                     }
-                    else {
-                        $currSlot.remove();
-                    }
-                    $currRow = $currRow.next();
-                    $currSlot = $("#" + course.getDays.charAt(j) + $currRow.attr("id"));
                 }
+
+            } else {
+                webCourses.push(course.getName + ", " + course.getBuilding);
             }
+        }
+
+        if (webCourses.length != 0) {
+            var courseList = "";
+            $container.append("<p><strong>Courses without assigned meeting " + 
+                              "times:</strong><br></p>");
+            webCourses.forEach(function(item, index) {
+                courseList += item + "<br>";
+            });
+            $("#weekTableContainer p").append(courseList);
         }
 
         // Show the contents of the container once it's all done.
