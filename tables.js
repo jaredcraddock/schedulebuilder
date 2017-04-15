@@ -28,9 +28,10 @@ function wipeWeekTable() {
     var weekTableVisible = $("#weekTableContainer").is(":visible");
 
     if (weekTableVisible) {
-        $("#weekTableContainer").hide("slow");
-        $("#weekTableContainer p").remove();
-        $("#weekTable").remove();
+        $("#weekTableContainer").fadeOut("slow", function() {
+            $("#weekTableContainer p").remove();
+            $("#weekTable").remove();
+        });
     }
 }
 
@@ -82,7 +83,7 @@ $(document).ready(function() {
         } ],
         orderCellsTop: true, // tells the table to do its odering on the top most header row. This must be true
         "order": [[1, 'asc']], // Automatically puts data in ascending order in CRN column.
-        "ajax": "ajax.txt",
+        "ajax": "https://kyleblud.github.io/schedulebuilder/ajax.txt",
         initComplete: function () { // wait for the table to complete initialization with its data
            this.api().columns().every(function () { // adds drop down boxes to only subject and days columns
               var column = this;
@@ -349,6 +350,6 @@ $(document).ready(function() {
         }
 
         // Show the contents of the container once it's all done.
-        $container.show("slow");
+        $container.fadeIn("slow");
     });
 } );
