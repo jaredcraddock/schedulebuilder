@@ -7,5 +7,14 @@ Table of Contents:
 	III. Classes and Functions
 --------------------------------------
 II. Overview :
-	
+Website: cuschedulebuilder.azurewebsites.net
+
+The CU schedule builder scrapes https://apps.concord.edu/schedules/seatstaken.php every 5 minutes in order to update course data. The project consist of a front-end by means of HTML,CSS, jQuery, and DataTables. The back end consist of a MySQL database, A web-scraper built in python, and a PHP server processing script.
+
+The process of events are as follows:
+The webscraper constantly scrapes Concord's website every 5 minutes and updates the MySQL database.
+The AJAX address in the front end tables.js file is set to the server side PHP script that queries the database.
+The PHP script queries the database and returns the information via JSON format to the front end.
+The front end receives this information and inserts it into a table that supports dynamic multi-column searching that does not require page refreshes
+The courses offered table continues to be constantly updated every 5 minutes.
 ---------------------------------------
