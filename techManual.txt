@@ -35,7 +35,7 @@ IV. Events
       i. Defines the variables for the DataTables, courseTable and scheduleTable, and sets the initiale settings for the tables
          a. Once courseTable completes its initialization, a function populates the dropdown select boxes for specified columns whose
             column header contains the selectSearch in its ID.
-         b. Both tables create text input search boxes for column headers that contain textSearch in its ID.
+         b. courseTable creates text input search boxes for column headers that contain textSearch in its ID.
 	 
    B. courseTable.on('click', '#addButton', function() {} )
       i. Adds a click event to the add button in the table and when the button is clicked, the row is removed from the course table and
