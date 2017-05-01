@@ -1,5 +1,5 @@
-#requires BeautifulSoup4, requests, and mysql/connector packages to run
 
+#requires BeautifulSoup4, requests, and mysql/connector packages to run
 from bs4 import BeautifulSoup
 import requests
 import mysql.connector
@@ -8,9 +8,10 @@ r = requests.get("https://apps.concord.edu/schedules/seatstaken.php")
 
 soup = BeautifulSoup(r.text, "html.parser")
 
-connection = mysql.connector.connect(user='root', host='127.0.0.1',database='Concord')
+connection = mysql.connector.connect(user='', host='', port='', password = '',database='')
 cursor = connection.cursor()
-
+delete_course = ("DELETE FROM courses ")
+cursor.execute(delete_course)
 tables = soup.findAll("table", id="classtable")
 
 for table in tables:
@@ -45,13 +46,14 @@ for table in tables:
                 ef          = cells[16].get_text()
                 startDate   = cells[17].get_text()
 
-                add_course = ("INSERT INTO CoursesOffered "
+                
+                add_course = ("INSERT INTO courses "
                 "(CRN, Subject, CRS, Section, Title, CH, MaxSeats, Enrolled, AvailableSeats, WL, "
                 "Days, STIME, ETIME, Building, Room, WK, Instructor, EF, StartDate) "
                 "VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)")
 
                 course_values = (crn, subject, crs, section, title, ch, maxSeats, enrolled, available, wl, days, stime, etime, building, room, wk, instructor, ef, startDate)
-
+               
                 cursor.execute(add_course, course_values)
 
                 print("Added {0:7} {1:7} {2:30} {3:10}".format(crn, subject, title, instructor))
