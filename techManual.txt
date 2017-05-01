@@ -4,8 +4,9 @@ Technical Support Manual
 Table of Contents:
 	I. Table of Contents.
 	II. Overview
-	III. Classes and Functions
+	III. Classes
 	IV. Events
+	V. Functions
 --------------------------------------
 II. Overview :
 Website: cuschedulebuilder.azurewebsites.net
@@ -23,11 +24,6 @@ III. Classes and Functions
 
 Classes
 	A. Course
-
-Functions
-	A. wipeWeekTable()
-   
-	B. prettifyTime(time)
 
 ---------------------------------------
 IV. Events
