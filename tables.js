@@ -69,6 +69,16 @@ $(document).ready(function() {
 
     // Definition of courseTable
     var courseTable = $('#courseTable').DataTable( {
+        //Highlights classes that are nearing capacity
+      "createdRow": function( row, data, dataIndex ) {
+        var percentFull = Number(data[7])/(Number(data[6]));
+        if (percentFull >= 1){        
+          $(row).addClass('red');
+        }   
+        else if ((percentFull) >=.75) {        
+          $(row).addClass('yellow');
+        }
+      },
 
         // Defines the first column to only have buttons and 
         // changes the width of the specified columns to 1.
@@ -83,7 +93,10 @@ $(document).ready(function() {
         } ],
         orderCellsTop: true, // tells the table to do its odering on the top most header row. This must be true
         "order": [[1, 'asc']], // Automatically puts data in ascending order in CRN column.
-        "ajax": "https://kyleblud.github.io/schedulebuilder/ajax.txt",
+        "ajax": {
+            "url": "server_processing.php",
+            "type": "POST"
+        },
         initComplete: function () { // wait for the table to complete initialization with its data
            this.api().columns().every(function () { // adds drop down boxes to only subject and days columns
               var column = this;
@@ -141,16 +154,22 @@ $(document).ready(function() {
             { title: "SUBJ" },
             { title: "CRS" },
             { title: "TITLE" },
+            { title: "CH" },
+            { title: "MAX" },
+            { title: "ENR" },
+            { title: "AVAILABLE" },
             { title: "DAYS" },
             { title: "STARTS" },
             { title: "ENDS" },
-            { title: "ROOM" },
-            { title: "INSTRUCTOR" } ],
+            { title: "BUILDING" },
+            { title: "ROOMS" },
+            { title: "INSTRUCTOR" }
+            ],
         data: null
     } );
 
     // Adds search boxes to the specified columns.
-    $(courseTable.columns([1, 3, 4, 8, 9]).header()).each(function () {
+    $(courseTable.columns([1,3,4,6,7,8,9,13,14]).header()).each(function () {
         $('#courseTable thead tr#filters th#textSearch' + $(this).html()).each(function() {
             $(this).html('<input type="text" placeholder="Search" style="width: 100%"/>');
         } );
@@ -189,7 +208,7 @@ $(document).ready(function() {
     } );
 
     // Apply the search for specified columns
-    courseTable.columns([1, 3, 4, 8, 9]).every( function () {
+    courseTable.columns([1,3,4,6,7,8,9,13,14]).every( function () {
         var that = this;
 
         // just as for adding the text searches, when applying them we have to match the text search input with the column it searches
@@ -211,10 +230,10 @@ $(document).ready(function() {
         // The indices (i) for each piece of information about a given course.
         // If the database changes, change these to accomodate.
         var iName = 3;
-        var iDays = 4;
-        var iStartTime = 5;
-        var iEndTime = 6;
-        var iBuilding = 7;
+        var iDays = 8;
+        var iStartTime = 9;
+        var iEndTime = 10;
+        var iBuilding = 11;
         var $container = $("#weekTableContainer");
 
         var earliestClass = 800;    // Earliest class offered at Concord.
