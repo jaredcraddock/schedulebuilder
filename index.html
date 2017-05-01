@@ -2,13 +2,32 @@
 <html>
 <head>
   <link rel="stylesheet" type="text/css" href="tableCSS.css">
-  <title>CU Schedule Builder</title>
+  <link rel="stylesheet" type="text/css" href="headerCSS.css">
 </head>
 <body>
-  <!-- jQuery and DataTables script -->
+
+  <!-- DataTables CSS styling and script -->
   <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script type="text/javascript" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
   <!-- Schedule Table -->
+    
+    
+  <div id="header">
+      <img src="concordlogo.png" style="padding-left: 50px">
+      
+      <div id="header-menu">
+        <ul>
+            <li><a href="https://cubanner.concord.edu:8443/cas/login?service=https%3A%2F%2Fcubanner.concord.edu%3A9005%2Fssomanager%2Fc%2FSSB%3Bjsessionid%3DdTm2ZCJB2ZWG1wYvPQfJfyq1ffRpw0DQdK7y3ZC8CXvNMW1vsF01%21210082198" target="_blank">MyCU</a></li>
+            
+            <li><a href="http://www.concord.edu/academics/node/14" target="_blank">Progression Sheets</a></li>
+            
+            <li><a href="http://www.concord.edu/academics/node/27" target="_blank">Divisions &amp; Departments</a></li>
+            
+        </ul>
+      
+      </div>
+  </div>
+
   <center><h1>Your Schedule</h1></center>
   <table id="scheduleTable" class="display" width="100%"></table>
   <!-- Week Table -->
@@ -16,6 +35,7 @@
   <div id = "weekTableContainer">
     <center><h1>Week at a Glance</h1></center>
   </div>
+
   <!-- Course Table -->
   <center><h1>Courses Offered: Fall 2017</h1></center>
   <table id="courseTable" class="display" width="100%">
@@ -26,9 +46,14 @@
         <th>SUBJ</th>
         <th>CRS</th>
         <th>TITLE</th>
+        <th>CH</th>
+        <th>MAX</th>
+        <th>ENR</th>
+        <th>AVAILABLE</th>
         <th>DAYS</th>
         <th>STARTS</th>
         <th>ENDS</th>
+        <th>BUILDING</th>
         <th>ROOMS</th>
         <th>INSTRUCTOR</th>
       </tr>
@@ -38,13 +63,20 @@
         <th id="selectSearchSUBJ">SUBJ</th>
         <th id="textSearchCRS">CRS</th>
         <th id="textSearchTITLE">TITLE</th>
+        <th id="selectSearchCH">CH</th>
+        <th id="textSearchMAX">MAX</th>
+        <th id="textSearchENR">ENR</th>
+        <th id="textSearchAVAILABLE">AVAILABLE</th>
         <th id="selectSearchDAYS">DAYS</th>
         <th id="selectSearchSTARTS">STARTS</th>
         <th id="selectSearchENDS">ENDS</th>
+        <th id="selectSearchBUILDING">BUILDING</th>
         <th id="textSearchROOMS">ROOMS</th>
         <th id="textSearchINSTRUCTOR">INSTRUCTOR</th>
       </tr>
     </thead>
+    <tfoot>
+    </tfoot>
   </table>
   <script type="text/javascript" src="tables.js"></script>
 </body>
