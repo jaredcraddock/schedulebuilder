@@ -19,6 +19,10 @@ The AJAX address in the front end tables.js file is set to the server side PHP s
 The PHP script queries the database and returns the information via JSON format to the front end.
 The front end receives this information and inserts it into a table that supports dynamic multi-column searching that does not require page refreshes
 The courses offered table continues to be constantly updated every 5 minutes.
+-------------------------------
+How To Setup
+-------------------------------
+The project requires web hosting and a MySQL database to run. Setup by FTPing the repo to the www folder of the web hosting service you are using. Edit the connection sections in the dbscrape.py and server_processing.php with the proper login and host information for your database. If the web scraper autorunning and updating the database is desired you must use a hosting service that supports Python and make a cron expression to autorun the script with what time interval you wish.
 ---------------------------------------
 III. Classes and Functions
 
