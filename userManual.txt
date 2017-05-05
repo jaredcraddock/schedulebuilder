@@ -1,1 +1,24 @@
 
+User Manual
+---------------------------
+Table of Contents:
+	I. Table of Contents.
+	II. Overview
+	III. Instructions
+--------------------------------------
+II. Overview :
+Website: cuschedulebuilder.azurewebsites.net
+
+The CU schedule builder is a project designed to make the advising process easier for both faculty and students. It offers multiple search options and an intuitive design in order to help you quickly locate the classes you are looking for. Once you are satisfied with the classes you've added on the website, you can print or write down the CRN numbers and click the MyCU button located on the top left to login to concord and add your classes.
+-------------------------------
+
+III. Instructions
+-------------------------------
+- Classes that have no seats avaliable are highlighted in red.
+- Classes that are close to filling up are highlighted in yellow.
+- Search for courses by using the drop down buttons and/or the text boxes under the columns. You can search multiple columns at once!
+- Click the ADD button beside a row to add a course to your schedule.
+- A list of your added classes will generate on the top half of the page as you add them.\
+- Click the Week At A Glance button to generate a helpful view of how your classes are layed out.
+
+
