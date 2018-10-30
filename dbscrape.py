@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 import requests
 import mysql.connector
 
+
 r = requests.get("https://apps.concord.edu/schedules/seatstaken.php")
 
 soup = BeautifulSoup(r.text, "html.parser")
@@ -18,10 +19,12 @@ for table in tables:
 
     for row in table.findAll("tr"):
         cells = row.findAll("td")
-
+        
         if len(cells) > 0:
 
             if cells[0].get_text() != "CRN":
+                start = ':'
+                end = 'B'
 
                 crn         = cells[0].get_text()
                 subject     = cells[1].get_text()
@@ -29,13 +32,17 @@ for table in tables:
                 section     = cells[3].get_text()
                 title       = cells[4].get_text()
                 ch          = cells[5].get_text()
-                maxSeats    = cells[6].get_text()
+                if(cells[6].get_text() == "0"):
+                    maxSeats = "0";
+                else:
+                    maxSeats    = cells[6].get_text().split(start)[1].split(end)[0]
                 enrolled    = cells[7].get_text()
                 available   = cells[8].get_text()
                 wl          = cells[9].get_text()
                 days        = cells[10].get_text()
                 stime       = cells[11].get_text()
                 etime       = cells[12].get_text()
+                
 
                 buildingRoom = cells[13].get_text().split()
                 building = buildingRoom[0]
