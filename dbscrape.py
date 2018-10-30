@@ -42,7 +42,7 @@ for table in tables:
                 days        = cells[10].get_text()
                 stime       = cells[11].get_text()
                 etime       = cells[12].get_text()
-                print(maxSeats)
+                
 
                 buildingRoom = cells[13].get_text().split()
                 building = buildingRoom[0]
