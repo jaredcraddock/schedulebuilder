@@ -72,7 +72,7 @@ $(document).ready(function() {
         //Highlights classes that are nearing capacity
       "createdRow": function( row, data, dataIndex ) {
         var percentFull = Number(data[7])/(Number(data[6]));
-        if (percentFull >= 1){        
+        if (percentFull >= 1 || Number(data[6]) == 0){        
           $(row).addClass('red');
         }   
         else if ((percentFull) >=.75) {        
